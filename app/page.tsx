@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import html2canvas from 'html2canvas'
-import { Dumbbell, ArrowRight, Mail, Phone, Download, CheckCircle, CreditCard, Banknote, AlertCircle } from 'lucide-react'
+import { Dumbbell, ArrowRight, Mail, Phone, Download, CheckCircle, CreditCard, Banknote, AlertCircle, Menu, X } from 'lucide-react'
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
 
 const InstagramIcon = ({ className }: { className?: string }) => (
@@ -223,6 +223,7 @@ export default function Home() {
   const [memberId, setMemberId] = useState('')
   const [selectedScheduleTab, setSelectedScheduleTab] = useState('Timing')
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -311,15 +312,50 @@ export default function Home() {
               <a href={socialLinks.whatsapp} target="_blank" rel="noreferrer" className="hover:text-primary transition-colors"><Phone className="h-4 w-4" /></a>
             </div>
           </div>
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => { document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }) }}
-            className="rounded-full bg-primary px-6 py-2 text-xs sm:px-8 sm:text-sm font-bold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            Join Now
-          </motion.button>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => { document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }) }}
+              className="rounded-full bg-primary px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Join Now
+            </motion.button>
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
+        
+        {/* Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden border-t border-border/20 bg-background/95 backdrop-blur-xl overflow-hidden"
+            >
+              <div className="flex flex-col px-4 py-6 gap-4 text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                <a href="#" onClick={(e) => { scrollToSection(e, 'home'); setIsMobileMenuOpen(false); }} className="hover:text-primary transition-colors text-foreground">Home</a>
+                <a href="#programs" onClick={(e) => { scrollToSection(e, 'programs'); setIsMobileMenuOpen(false); }} className="hover:text-primary transition-colors">Programs</a>
+                <a href="#schedule" onClick={(e) => { scrollToSection(e, 'schedule'); setIsMobileMenuOpen(false); }} className="hover:text-primary transition-colors">Schedule</a>
+                <a href="#about" onClick={(e) => { scrollToSection(e, 'about'); setIsMobileMenuOpen(false); }} className="hover:text-primary transition-colors">About</a>
+                <a href="#progress" onClick={(e) => { scrollToSection(e, 'progress'); setIsMobileMenuOpen(false); }} className="hover:text-primary transition-colors">Progress</a>
+                <a href="#contact" onClick={(e) => { scrollToSection(e, 'contact'); setIsMobileMenuOpen(false); }} className="hover:text-primary transition-colors">Contact</a>
+                
+                <div className="flex items-center gap-4 pt-4 border-t border-border/20 mt-2">
+                  <a href={socialLinks.instagram} target="_blank" rel="noreferrer" className="hover:text-primary transition-colors"><InstagramIcon className="h-5 w-5" /></a>
+                  <a href={socialLinks.facebook} target="_blank" rel="noreferrer" className="hover:text-primary transition-colors"><FacebookIcon className="h-5 w-5" /></a>
+                  <a href={socialLinks.whatsapp} target="_blank" rel="noreferrer" className="hover:text-primary transition-colors"><Phone className="h-5 w-5" /></a>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
       {/* Hero Section */}

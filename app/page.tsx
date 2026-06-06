@@ -255,9 +255,9 @@ export default function Home() {
   }
 
   const getCardTheme = (plan: string | null) => {
-    if (plan === 'Basic Plan') return { bg: 'bg-[#F9F9F6]', text: 'text-[#B8985B]', primaryText: 'text-[#8A7143]', border: 'border-[#B8985B]' };
-    if (plan === 'Regular Plan') return { bg: 'bg-[#FF4500]', text: 'text-white/80', primaryText: 'text-white', border: 'border-white/40' };
-    return { bg: 'bg-[#111111]', text: 'text-[#D4AF37]', primaryText: 'text-[#D4AF37]', border: 'border-[#D4AF37]/50' };
+    if (plan === 'Basic Plan') return { bg: 'bg-[#FDFBF7]', text: 'text-[#C5A059]', primaryText: 'text-[#C5A059]', border: 'border-[#C5A059]' };
+    if (plan === 'Regular Plan') return { bg: 'bg-[#1A1A1A]', text: 'text-[#C5A059]', primaryText: 'text-[#C5A059]', border: 'border-[#C5A059]' };
+    return { bg: 'bg-[#111111]', text: 'text-[#D4AF37]', primaryText: 'text-[#D4AF37]', border: 'border-[#D4AF37]' };
   }
 
   const handlePlanSelect = (plan: string) => {
@@ -293,10 +293,10 @@ export default function Home() {
         className={`fixed top-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'border-b border-border/20 bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/40 shadow-xl' : 'bg-transparent border-transparent'}`}
       >
         <div className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-6'}`}>
-          <div className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2 cursor-pointer">
             <Dumbbell className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold tracking-widest text-foreground uppercase">FITZONE</span>
-          </div>
+          </a>
           <div className="hidden md:flex gap-8 items-center text-sm font-medium text-muted-foreground uppercase tracking-wider">
             <a href="#" onClick={(e) => scrollToSection(e, 'home')} className="hover:text-primary transition-colors text-foreground">Home</a>
             <a href="#programs" onClick={(e) => scrollToSection(e, 'programs')} className="hover:text-primary transition-colors">Programs</a>
@@ -520,7 +520,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="bg-card/40 backdrop-blur-md rounded-2xl p-8 border border-border/50 text-white mt-4"
+                    className="bg-card/40 backdrop-blur-md rounded-2xl p-4 sm:p-8 border border-border/50 text-white mt-4 overflow-hidden w-full"
                   >
                     <div className="mb-8">
                       <h3 className="text-2xl font-black uppercase text-primary mb-2">{selectedScheduleTab} Program</h3>
@@ -554,11 +554,11 @@ export default function Home() {
                           ))}
                         </ul>
                       </div>
-                      <div>
+                      <div className="mt-8 md:mt-0 w-full overflow-hidden">
                         <h4 className="text-sm font-black uppercase text-gray-400 mb-4 pb-2 border-b border-border/50">Core Exercises</h4>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2 w-full">
                           {workoutPlans[selectedScheduleTab]?.exercises.map((ex: string, idx: number) => (
-                            <span key={idx} className="bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded-full text-xs font-bold shadow-sm">
+                            <span key={idx} className="bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded-full text-xs font-bold shadow-sm whitespace-normal text-center">
                               {ex}
                             </span>
                           ))}
@@ -790,7 +790,7 @@ export default function Home() {
                         {/* Digital Membership Card */}
                         <div 
                           ref={cardRef}
-                          className={`w-[450px] max-w-full aspect-[1.586] rounded-2xl p-4 sm:p-6 relative flex flex-col justify-between border-2 shadow-2xl mb-8 group ${getCardTheme(selectedPlan).bg} ${getCardTheme(selectedPlan).border}`}
+                          className={`w-[450px] max-w-full aspect-auto sm:aspect-[1.586] rounded-2xl p-4 sm:p-6 relative flex flex-col justify-between border-2 shadow-2xl mb-8 group ${getCardTheme(selectedPlan).bg} ${getCardTheme(selectedPlan).border}`}
                         >
                           {/* Top Section */}
                           <div className={`flex items-center justify-center gap-2 sm:gap-3 ${getCardTheme(selectedPlan).primaryText}`}>
@@ -812,23 +812,23 @@ export default function Home() {
                           {/* Details Grid */}
                           <div className="grid grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-3 sm:gap-y-5 px-2 sm:px-6 mt-1 sm:mt-2">
                             {/* Card Number */}
-                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-0.5 sm:pb-1 flex flex-col items-center`}>
-                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-0.5 sm:mb-1 ${getCardTheme(selectedPlan).text}`}>Card Number</span>
+                            <div className="flex flex-col items-center">
+                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-1 sm:mb-2 w-full text-center border-b ${getCardTheme(selectedPlan).border} pb-1 ${getCardTheme(selectedPlan).text}`}>Card Number</span>
                                <span className={`text-[8px] sm:text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{memberId}</span>
                             </div>
                             {/* Membership Type */}
-                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-0.5 sm:pb-1 flex flex-col items-center`}>
-                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-0.5 sm:mb-1 ${getCardTheme(selectedPlan).text}`}>Membership Type</span>
+                            <div className="flex flex-col items-center">
+                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-1 sm:mb-2 w-full text-center border-b ${getCardTheme(selectedPlan).border} pb-1 ${getCardTheme(selectedPlan).text}`}>Membership Type</span>
                                <span className={`text-[8px] sm:text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{selectedPlan}</span>
                             </div>
                             {/* Valid From */}
-                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-0.5 sm:pb-1 flex flex-col items-center`}>
-                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-0.5 sm:mb-1 ${getCardTheme(selectedPlan).text}`}>Valid From</span>
+                            <div className="flex flex-col items-center">
+                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-1 sm:mb-2 w-full text-center border-b ${getCardTheme(selectedPlan).border} pb-1 ${getCardTheme(selectedPlan).text}`}>Valid From</span>
                                <span className={`text-[8px] sm:text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{formatDate(startDate)}</span>
                             </div>
                             {/* Valid Until */}
-                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-0.5 sm:pb-1 flex flex-col items-center`}>
-                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-0.5 sm:mb-1 ${getCardTheme(selectedPlan).text}`}>Valid Until</span>
+                            <div className="flex flex-col items-center">
+                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-1 sm:mb-2 w-full text-center border-b ${getCardTheme(selectedPlan).border} pb-1 ${getCardTheme(selectedPlan).text}`}>Valid Until</span>
                                <span className={`text-[8px] sm:text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{formatDate(getExpiryDate(selectedPlan))}</span>
                             </div>
                           </div>

@@ -790,53 +790,53 @@ export default function Home() {
                         {/* Digital Membership Card */}
                         <div 
                           ref={cardRef}
-                          className={`w-[450px] max-w-full aspect-[1.586] rounded-2xl p-6 relative flex flex-col justify-between border-2 shadow-2xl mb-8 group ${getCardTheme(selectedPlan).bg} ${getCardTheme(selectedPlan).border}`}
+                          className={`w-[450px] max-w-full aspect-[1.586] rounded-2xl p-4 sm:p-6 relative flex flex-col justify-between border-2 shadow-2xl mb-8 group ${getCardTheme(selectedPlan).bg} ${getCardTheme(selectedPlan).border}`}
                         >
                           {/* Top Section */}
-                          <div className={`flex items-center justify-center gap-3 ${getCardTheme(selectedPlan).primaryText}`}>
-                            <Dumbbell className="h-5 w-5" />
-                            <span className="text-[11px] font-bold tracking-[0.25em] uppercase">FITZONE</span>
+                          <div className={`flex items-center justify-center gap-2 sm:gap-3 ${getCardTheme(selectedPlan).primaryText}`}>
+                            <Dumbbell className="h-4 w-4 sm:h-5 sm:w-5" />
+                            <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.25em] uppercase">FITZONE</span>
                           </div>
                           
                           {/* Middle Section */}
-                          <div className="text-center mt-3">
-                            <p className={`text-[10px] tracking-widest uppercase mb-1 font-bold ${getCardTheme(selectedPlan).primaryText}`}>{userDetails.name || 'MEMBER NAME'}</p>
-                            <h3 className={`text-3xl font-serif tracking-[0.15em] uppercase ${getCardTheme(selectedPlan).primaryText}`} style={{ fontFamily: 'Georgia, serif' }}>MEMBERSHIP CARD</h3>
-                            <div className="flex items-center justify-center my-3 gap-3">
-                               <div className={`h-[1px] w-12 ${getCardTheme(selectedPlan).border} opacity-50`}></div>
-                               <span className={`text-[8px] tracking-[0.2em] uppercase ${getCardTheme(selectedPlan).text}`}>COMMIT TO YOUR FITNESS JOURNEY</span>
-                               <div className={`h-[1px] w-12 ${getCardTheme(selectedPlan).border} opacity-50`}></div>
+                          <div className="text-center mt-2 sm:mt-3">
+                            <p className={`text-[8px] sm:text-[10px] tracking-widest uppercase mb-1 font-bold ${getCardTheme(selectedPlan).primaryText}`}>{userDetails.name || 'MEMBER NAME'}</p>
+                            <h3 className={`text-xl sm:text-3xl font-serif tracking-[0.15em] uppercase ${getCardTheme(selectedPlan).primaryText}`} style={{ fontFamily: 'Georgia, serif' }}>MEMBERSHIP CARD</h3>
+                            <div className="flex items-center justify-center my-2 sm:my-3 gap-2 sm:gap-3">
+                               <div className={`h-[1px] w-8 sm:w-12 ${getCardTheme(selectedPlan).border} opacity-50`}></div>
+                               <span className={`text-[6px] sm:text-[8px] tracking-[0.2em] uppercase ${getCardTheme(selectedPlan).text}`}>COMMIT TO YOUR FITNESS JOURNEY</span>
+                               <div className={`h-[1px] w-8 sm:w-12 ${getCardTheme(selectedPlan).border} opacity-50`}></div>
                             </div>
                           </div>
                           
                           {/* Details Grid */}
-                          <div className="grid grid-cols-2 gap-x-12 gap-y-5 px-6 mt-2">
+                          <div className="grid grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-3 sm:gap-y-5 px-2 sm:px-6 mt-1 sm:mt-2">
                             {/* Card Number */}
-                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-1 flex flex-col items-center`}>
-                               <span className={`text-[8px] tracking-widest uppercase mb-1 ${getCardTheme(selectedPlan).text}`}>Card Number</span>
-                               <span className={`text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{memberId}</span>
+                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-0.5 sm:pb-1 flex flex-col items-center`}>
+                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-0.5 sm:mb-1 ${getCardTheme(selectedPlan).text}`}>Card Number</span>
+                               <span className={`text-[8px] sm:text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{memberId}</span>
                             </div>
                             {/* Membership Type */}
-                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-1 flex flex-col items-center`}>
-                               <span className={`text-[8px] tracking-widest uppercase mb-1 ${getCardTheme(selectedPlan).text}`}>Membership Type</span>
-                               <span className={`text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{selectedPlan}</span>
+                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-0.5 sm:pb-1 flex flex-col items-center`}>
+                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-0.5 sm:mb-1 ${getCardTheme(selectedPlan).text}`}>Membership Type</span>
+                               <span className={`text-[8px] sm:text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{selectedPlan}</span>
                             </div>
                             {/* Valid From */}
-                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-1 flex flex-col items-center`}>
-                               <span className={`text-[8px] tracking-widest uppercase mb-1 ${getCardTheme(selectedPlan).text}`}>Valid From</span>
-                               <span className={`text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{formatDate(startDate)}</span>
+                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-0.5 sm:pb-1 flex flex-col items-center`}>
+                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-0.5 sm:mb-1 ${getCardTheme(selectedPlan).text}`}>Valid From</span>
+                               <span className={`text-[8px] sm:text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{formatDate(startDate)}</span>
                             </div>
                             {/* Valid Until */}
-                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-1 flex flex-col items-center`}>
-                               <span className={`text-[8px] tracking-widest uppercase mb-1 ${getCardTheme(selectedPlan).text}`}>Valid Until</span>
-                               <span className={`text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{formatDate(getExpiryDate(selectedPlan))}</span>
+                            <div className={`border-b ${getCardTheme(selectedPlan).border} pb-0.5 sm:pb-1 flex flex-col items-center`}>
+                               <span className={`text-[6px] sm:text-[8px] tracking-widest uppercase mb-0.5 sm:mb-1 ${getCardTheme(selectedPlan).text}`}>Valid Until</span>
+                               <span className={`text-[8px] sm:text-[10px] font-bold tracking-wider ${getCardTheme(selectedPlan).primaryText}`}>{formatDate(getExpiryDate(selectedPlan))}</span>
                             </div>
                           </div>
                           
                           {/* Footer */}
-                          <div className={`flex items-center justify-center gap-2 mt-5 ${getCardTheme(selectedPlan).primaryText}`}>
-                            <InstagramIcon className="h-4 w-4" />
-                            <span className="text-[10px] tracking-widest uppercase font-bold">IMJESWAR</span>
+                          <div className={`flex items-center justify-center gap-1 sm:gap-2 mt-3 sm:mt-5 ${getCardTheme(selectedPlan).primaryText}`}>
+                            <InstagramIcon className="h-3 w-3 sm:h-4 sm:w-4" />
+                            <span className="text-[8px] sm:text-[10px] tracking-widest uppercase font-bold">IMJESWAR</span>
                           </div>
                         </div>
 

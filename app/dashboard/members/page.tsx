@@ -48,6 +48,8 @@ export default function MembersPage() {
     try {
       const newMember = database.createMember({
         ...formData,
+        height: formData.height ? parseFloat(formData.height) : undefined,
+        weight: formData.weight ? parseFloat(formData.weight) : undefined,
         password: '',
         role: 'member',
       })

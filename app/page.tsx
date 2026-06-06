@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, Variants } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
@@ -22,7 +22,7 @@ const FacebookIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -30,7 +30,7 @@ const containerVariants = {
   },
 }
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -77,11 +77,6 @@ const ProgramCard = ({ program, idx }: { program: any, idx: number }) => {
     }
     return () => clearInterval(interval);
   }, [isHovered, program.images.length]);
-
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <motion.div 
@@ -215,6 +210,11 @@ const socialLinks = {
   whatsapp: "https://wa.me/917904181537"
 }
 
+const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  e.preventDefault();
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
 export default function Home() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
   const [checkoutStep, setCheckoutStep] = useState<'details' | 'payment' | 'success'>('details')
@@ -222,7 +222,16 @@ export default function Home() {
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'online' | null>(null)
   const [memberId, setMemberId] = useState('')
   const [selectedScheduleTab, setSelectedScheduleTab] = useState('Timing')
+  const [isScrolled, setIsScrolled] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const getPlanPrice = (plan: string) => {
     if (plan === 'Basic Plan') return 1999
@@ -276,8 +285,13 @@ export default function Home() {
       <AnimatedBackground />
       
       {/* Navbar */}
-      <nav className="fixed top-0 z-50 w-full border-b border-border/10 bg-background/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
+        className={`fixed top-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'border-b border-border/20 bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/40 shadow-xl' : 'bg-transparent border-transparent'}`}
+      >
+        <div className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-6'}`}>
           <div className="flex items-center gap-2">
             <Dumbbell className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold tracking-widest text-foreground uppercase">FITZONE</span>
@@ -301,12 +315,12 @@ export default function Home() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => { document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }) }}
-            className="hidden md:block rounded-full bg-primary px-8 py-2 text-sm font-bold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors"
+            className="rounded-full bg-primary px-6 py-2 text-xs sm:px-8 sm:text-sm font-bold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors"
           >
             Join Now
           </motion.button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen pt-20 flex items-center">
@@ -656,15 +670,15 @@ export default function Home() {
                           <div className="space-y-5">
                             <div>
                               <label className="block text-xs font-bold uppercase text-gray-400 mb-2">Full Name</label>
-                              <input type="text" value={userDetails.name} onChange={e => setUserDetails({...userDetails, name: e.target.value})} placeholder="John Doe" className="w-full bg-background/50 border border-border/50 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" required />
+                              <input type="text" value={userDetails.name} onChange={e => setUserDetails({...userDetails, name: e.target.value})} placeholder="Enter your name" className="w-full bg-background/50 border border-border/50 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" required />
                             </div>
                             <div>
                               <label className="block text-xs font-bold uppercase text-gray-400 mb-2">Email Address</label>
-                              <input type="email" value={userDetails.email} onChange={e => setUserDetails({...userDetails, email: e.target.value})} placeholder="john@example.com" className="w-full bg-background/50 border border-border/50 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" required />
+                              <input type="email" value={userDetails.email} onChange={e => setUserDetails({...userDetails, email: e.target.value})} placeholder="Enter your email" className="w-full bg-background/50 border border-border/50 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" required />
                             </div>
                             <div>
                               <label className="block text-xs font-bold uppercase text-gray-400 mb-2">Phone Number</label>
-                              <input type="tel" value={userDetails.phone} onChange={e => setUserDetails({...userDetails, phone: e.target.value})} placeholder="+91 98765 43210" className="w-full bg-background/50 border border-border/50 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" required />
+                              <input type="tel" value={userDetails.phone} onChange={e => setUserDetails({...userDetails, phone: e.target.value})} placeholder="Enter your phone number" className="w-full bg-background/50 border border-border/50 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" required />
                             </div>
                           </div>
                           

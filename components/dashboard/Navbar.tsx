@@ -50,7 +50,7 @@ export function Navbar({ userName = 'User', userRole = 'member', onSidebarToggle
   ]
 
   return (
-    <nav className="sticky top-0 z-40 border-b border-border/50 bg-card/50 backdrop-blur">
+    <nav className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/40 backdrop-blur-xl supports-[backdrop-filter]:bg-background/20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
